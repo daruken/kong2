@@ -30,7 +30,9 @@ public class SecurityConfiguration {
                 .and()
                 .authorizeHttpRequests(authorize -> authorize
                         .shouldFilterAllDispatcherTypes(false)
-                        .requestMatchers("/test")
+                        .requestMatchers("/test",
+                                "/api/v1/members/sign-up",
+                                "/api/v1/members/sign-in")
                         .permitAll()
                         .anyRequest()
                         .authenticated()
