@@ -6,4 +6,5 @@ import org.springframework.data.domain.Pageable;
 
 public interface CustomMemberRepository {
     Page<MemberDto> findAllMembers(Pageable pageable);
+    boolean existsByName(String name);
 }

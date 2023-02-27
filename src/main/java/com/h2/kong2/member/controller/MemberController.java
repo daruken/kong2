@@ -9,10 +9,11 @@ import com.h2.kong2.member.service.MemberQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/members")
+@RequestMapping("/api/v1/members")
 public class MemberController {
     MemberCommandService memberCommandService;
     MemberQueryService memberQueryService;
@@ -29,7 +30,7 @@ public class MemberController {
     }
 
     @PostMapping("/sign-up")
-    public MemberDto signUp(@RequestBody SignUpDto signUpDto) {
+    public MemberDto signUp(@RequestBody @Validated SignUpDto signUpDto) {
         return memberCommandService.signUp(signUpDto);
     }
 
