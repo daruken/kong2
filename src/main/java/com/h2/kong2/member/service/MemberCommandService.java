@@ -1,5 +1,6 @@
 package com.h2.kong2.member.service;
 
+import com.h2.kong2.exception.AlreadyExistsException;
 import com.h2.kong2.member.domain.Member;
 import com.h2.kong2.member.domain.MemberRepository;
 import com.h2.kong2.member.domain.dto.MemberDto;
@@ -32,6 +33,10 @@ public class MemberCommandService {
     }
 
     public MemberDto signUp(SignUpDto signUpDto) {
+        if (memberRepository.existsByName(signUpDto.getName())) {
+            throw new AlreadyExistsException("이미 가입된 사용자입니다.");
+        }
+
         Member member = Member.builder()
                 .name(signUpDto.getName())
                 .password(passwordEncoder.encode(signUpDto.getPassword()))

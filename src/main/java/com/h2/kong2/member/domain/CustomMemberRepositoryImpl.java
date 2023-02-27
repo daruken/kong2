@@ -41,4 +41,12 @@ public class CustomMemberRepositoryImpl implements CustomMemberRepository {
 
         return new PageImpl<>(content, pageable, totalCount);
     }
+
+    @Override
+    public boolean existsByName(String name) {
+        return queryFactory.selectOne()
+                .from(member)
+                .where(member.name.eq(name))
+                .fetchFirst() != null;
+    }
 }
