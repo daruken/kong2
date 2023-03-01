@@ -33,14 +33,14 @@ public class MemberCommandService {
     }
 
     public MemberDto signUp(SignUpDto signUpDto) {
-        if (memberRepository.existsByName(signUpDto.getName())) {
+        if (memberRepository.existsByName(signUpDto.name())) {
             throw new AlreadyExistsException("이미 가입된 사용자입니다.");
         }
 
         Member member = Member.builder()
-                .name(signUpDto.getName())
-                .password(passwordEncoder.encode(signUpDto.getPassword()))
-                .email(signUpDto.getEmail())
+                .name(signUpDto.name())
+                .password(passwordEncoder.encode(signUpDto.password()))
+                .email(signUpDto.email())
                 .createdDate(LocalDateTime.now())
                 .updatedDate(LocalDateTime.now())
                 .build();
@@ -56,8 +56,8 @@ public class MemberCommandService {
     }
 
     public SignInResultDto signIn(SignInDto signInDto) throws RuntimeException {
-        Member member = memberRepository.getMemberByName(signInDto.getName());
-        if (!passwordEncoder.matches(signInDto.getPassword(), member.getPassword())) {
+        Member member = memberRepository.getMemberByName(signInDto.name());
+        if (!passwordEncoder.matches(signInDto.password(), member.getPassword())) {
             return SignInResultDto.builder()
                     .isLogin(false)
                     .build();
