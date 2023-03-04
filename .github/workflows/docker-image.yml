@@ -35,4 +35,4 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
         
     - name: Docker Hub Publish
-      run: docker push daruken/kong2:tags
+      run: docker push daruken/kong2
