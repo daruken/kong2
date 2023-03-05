@@ -27,13 +27,7 @@ jobs:
       run: ./gradlew build -x test
 
     - name: Build the Docker image
-      uses: docker/build-push-action@v2
-      with:
-        context: .
-        file: ./Dockerfile
-        platforms: linux/amd64
-        push: true
-        tag_name: ${{ env.TAG }}
+      run: docker build --tag kong2:${{ env.TAG }} .
       
     - name: Docker Hub Login
       uses: docker/login-action@v2
