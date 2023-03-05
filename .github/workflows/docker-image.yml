@@ -52,6 +52,6 @@ jobs:
            sudo docker stop $(docker ps -q) \
            sudo docker rm -f $(docker ps -q) \
            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/kong2:${{ env.TAG }} \
-           sudo docker run -d -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/kong2
+           sudo docker run -d -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/kong2:${{ env.TAG }}
            sudo docker image prune -f
 
