@@ -37,5 +37,5 @@ jobs:
         
     - name: Docker Hub Publish
       run: 
-        docker tag ${{ env.TAG }} ${{ secrets.DOCKERHUB_USERNAME }}/kong2
+        docker tag kong2:${{ env.TAG }} ${{ secrets.DOCKERHUB_USERNAME }}/kong2
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.TAG }}
