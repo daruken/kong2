@@ -36,4 +36,4 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
         
     - name: Docker Hub Publish
-      run: docker image push ${{ secrets.DOCKERHUB_USERNAME }}/kong2:${{ env.TAG }}
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/kong2
