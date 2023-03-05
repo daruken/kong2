@@ -35,7 +35,8 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
         
+    - name: Docker Hub Tag
+      run: docker tag kong2:${{ env.TAG }} ${{ secrets.DOCKERHUB_USERNAME }}/kong2:${{ env.TAG }}
+        
     - name: Docker Hub Publish
-      run: 
-        docker tag kong2:${{ env.TAG }} ${{ secrets.DOCKERHUB_USERNAME }}/kong2:${{ env.TAG }}
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/kong2:${{ env.TAG }}
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/kong2:${{ env.TAG }}
