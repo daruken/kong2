@@ -1,9 +1,9 @@
 spring:
   datasource:
     username: zzimkong
-    password: khjjhr0330
+    password:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://database-2.cq7e5fk9ocq3.us-east-2.rds.amazonaws.com:3306/zzimkong?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://localhost:3306/zzimkong?serverTimezone=Asia/Seoul
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5Dialect
