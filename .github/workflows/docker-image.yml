@@ -60,5 +60,5 @@ jobs:
            sudo docker rm $(docker ps -q) \
            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/kong2:${{ env.TAG }} \
            sudo docker-compose up \
-           sudo docker image prune -f
+           sudo docker image prune --force
 
