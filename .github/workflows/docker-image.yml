@@ -49,7 +49,7 @@ jobs:
         key: ${{ secrets.KEY }}
         script: |
            sudo docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }} \
-           sudo docker stop $(docker ps -q) \
+           sudo docker rm -f $(docker ps -qa)
            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/kong2:${{ env.TAG }} \
            sudo docker run -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/kong2:${{ env.TAG }}
-
+           sudo docker image prune -f
