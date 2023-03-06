@@ -9,4 +9,9 @@ public class TestController {
     public String test() {
         return "Hello";
     }
+
+    @GetMapping("/test2")
+    public String test2() {
+        return "홍텐의 개인 서비스입니다.";
+    }
 }
