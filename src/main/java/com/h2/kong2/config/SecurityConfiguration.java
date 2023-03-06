@@ -31,6 +31,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(authorize -> authorize
                         .shouldFilterAllDispatcherTypes(false)
                         .requestMatchers("/test",
+                                "/test2",
                                 "/api/v1/members/sign-up",
                                 "/api/v1/members/sign-in")
                         .permitAll()
