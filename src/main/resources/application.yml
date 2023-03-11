@@ -1,17 +1,3 @@
 spring:
-  datasource:
-    username: zzimkong
-    password: khjjhr0330
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://database-2.cq7e5fk9ocq3.us-east-2.rds.amazonaws.com:3306/zzimkong?serverTimezone=Asia/Seoul
-  jpa:
-    database: mysql
-    database-platform: org.hibernate.dialect.MySQL5Dialect
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-  output.ansi.enabled: always
-
-springboot:
-  jwt:
-    secret: supernatural!@#
+  profiles:
+    active: test
