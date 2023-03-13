@@ -8,7 +8,6 @@ import com.h2.kong2.member.domain.dto.SignInDto;
 import com.h2.kong2.member.domain.dto.SignInResultDto;
 import com.h2.kong2.member.domain.dto.SignUpDto;
 import com.h2.kong2.security.JwtTokenProvider;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
