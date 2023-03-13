@@ -23,7 +23,6 @@ public class MemberCommandService {
     public MemberRepository memberRepository;
     public PasswordEncoder passwordEncoder;
 
-    @Autowired
     public MemberCommandService(JwtTokenProvider jwtTokenProvider,
                                 MemberRepository memberRepository,
                                 PasswordEncoder passwordEncoder) {
