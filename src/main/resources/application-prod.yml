@@ -3,8 +3,8 @@ spring:
     activate:
       on-profile: prod
   datasource:
-    username: zzimkong
-    password: khjjhr0330
+    username:
+    password:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://database-2.cq7e5fk9ocq3.us-east-2.rds.amazonaws.com:3306/zzimkong?serverTimezone=Asia/Seoul
   jpa:
