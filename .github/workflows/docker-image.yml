@@ -13,12 +13,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - run: export MYSQL_USERNAME = "${{ secrets.MYSQL_USERNAME }}"
-    - run: export MYSQL_PASSWORD = "${{ secrets.MYSQL_PASSWORD }}"
-    - run: export MYSQL_HOST = "${{ secrets.MYSQL_HOST }}"
-    - run: export JWT_KEY = "${{ secrets.JWT_KEY }}"
-    - run: echo "${{ secrets.APPLICATION }}" > ./src/main/resources/application-prod.yml
-
+      env:
+        MYSQL_USERNAME: "${{ secrets.MYSQL_USERNAME }}"
+        MYSQL_PASSWORD: "${{ secrets.MYSQL_PASSWORD }}"
+        MYSQL_HOST: "${{ secrets.MYSQL_HOST }}"
+        JWT_KEY: "${{ secrets.JWT_KEY }}"
     
     - name: Set env
       run: echo "TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
