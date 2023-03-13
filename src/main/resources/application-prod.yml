@@ -6,7 +6,7 @@ spring:
     username:
     password:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://database-2.cq7e5fk9ocq3.us-east-2.rds.amazonaws.com:3306/zzimkong?serverTimezone=Asia/Seoul
+    url:
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5Dialect
