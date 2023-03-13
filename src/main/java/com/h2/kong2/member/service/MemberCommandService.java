@@ -8,7 +8,6 @@ import com.h2.kong2.member.domain.dto.SignInDto;
 import com.h2.kong2.member.domain.dto.SignInResultDto;
 import com.h2.kong2.member.domain.dto.SignUpDto;
 import com.h2.kong2.security.JwtTokenProvider;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +17,6 @@ import java.util.ArrayList;
 
 @Service
 @Transactional
-@DependsOn(value = {"BeanJwt"})
 public class MemberCommandService {
     public JwtTokenProvider jwtTokenProvider;
     public MemberRepository memberRepository;
