@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: zzimkong
+      MYSQL_ROOT_PASSWORD: 
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    volumes:
+      - /opt/homebrew/var/mysql:/var/lib/mysql
+
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/zzimkong
+      SPRING_DATASOURCE_USERNAME: zzimkong
+      SPRING_DATASOURCE_PASSWORD: 
+    depends_on:
+      - db
