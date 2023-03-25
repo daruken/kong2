@@ -28,12 +28,10 @@ public class JwtTokenProvider {
 
     //@Value("${springboot.jwt.secret}")
     private String secretKey = "secretKey";
-    private final long tokenValidMillisecond = 1000L * 60 * 60;
 
     @PostConstruct
     protected void init() {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes(StandardCharsets.UTF_8));
-        LOGGER.info("[init] JwtTokenProvider secretKey initialized.");
     }
 
     public String createToken(String memberName, List<String> roles) {
@@ -41,34 +39,29 @@ public class JwtTokenProvider {
         claims.put("roles", roles);
         Date now = new Date();
 
-        String token = Jwts.builder()
+        return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(now)
-                .setExpiration(new Date(now.getTime() + tokenValidMillisecond))
+                .setExpiration(new Date(now.getTime() + JwtProperties.tokenValidMillisecond))
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
-
-        LOGGER.info("[createToken] Token created.");
-        return token;
     }
 
     public Authentication getAuthentication(String token) {
         UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername(this.getUsername(token));
-        LOGGER.info("[getAuthentication] UserDetails MemberName : {}", userDetails.getUsername());
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
     public String getUsername(String token) {
-        LOGGER.info("[getUsername] Extract information completed from jwt.");
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
 
     public String resolveToken(HttpServletRequest httpServletRequest) {
-        return httpServletRequest.getHeader("X-AUTH-TOKEN");
+        String header = httpServletRequest.getHeader(JwtProperties.HEADER_STRING);
+        return header == null ? null : header.substring(JwtProperties.TOKEN_PREFIX.length());
     }
 
     public boolean validateToken(String token) {
-        LOGGER.info("[validateToken] Validate token check started.");
         try {
             Jws<Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
             return !claims.getBody().getExpiration().before(new Date());
