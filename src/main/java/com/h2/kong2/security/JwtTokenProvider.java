@@ -1,9 +1,6 @@
 package com.h2.kong2.security;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +23,7 @@ public class JwtTokenProvider {
     private final Logger LOGGER = LoggerFactory.getLogger(JwtTokenProvider.class);
     private final UserDetailsServiceImpl userDetailsServiceImpl;
 
-    //@Value("${springboot.jwt.secret}")
+    @Value("${springboot.jwt.secret}")
     private String secretKey = "secretKey";
 
     @PostConstruct
@@ -65,8 +62,17 @@ public class JwtTokenProvider {
         try {
             Jws<Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
             return !claims.getBody().getExpiration().before(new Date());
-        } catch (Exception e) {
-            LOGGER.error("[validateToken] Exception validate token check.");
+        } catch (SecurityException | MalformedJwtException e) {
+            LOGGER.error("[validateToken] Wrong signature from jwt.");
+            return false;
+        } catch (ExpiredJwtException e) {
+            LOGGER.error("[validateToken] Expired jwt.");
+            return false;
+        } catch (UnsupportedJwtException e) {
+            LOGGER.error("[validateToken] Not support jwt type.");
+            return false;
+        } catch (IllegalArgumentException e) {
+            LOGGER.error("[validateToken] Wrong jwt.");
             return false;
         }
     }
