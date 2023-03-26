@@ -5,6 +5,7 @@ import com.h2.kong2.yogurt.domain.dto.YogurtSearchDto;
 import com.h2.kong2.yogurt.service.YogurtQueryService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class YogurtController {
     }
 
     @PostMapping("/search")
-    public Page<YogurtDto> searchYogurt(Pageable pageable, @RequestBody YogurtSearchDto yogurtSearchDto) {
+    public Page<YogurtDto> searchYogurt(@PageableDefault(size = 10, sort = "name") Pageable pageable, @RequestBody YogurtSearchDto yogurtSearchDto) {
         return yogurtQueryService.selectAllByCondition(pageable, yogurtSearchDto);
     }
 }
