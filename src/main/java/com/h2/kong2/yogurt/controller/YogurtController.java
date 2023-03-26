@@ -1,10 +1,12 @@
 package com.h2.kong2.yogurt.controller;
 
 import com.h2.kong2.yogurt.domain.dto.YogurtDto;
+import com.h2.kong2.yogurt.domain.dto.YogurtSearchDto;
 import com.h2.kong2.yogurt.service.YogurtQueryService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,5 +22,10 @@ public class YogurtController {
     @GetMapping("")
     public List<YogurtDto> getYogurtList() {
         return yogurtQueryService.selectAll();
+    }
+
+    @PostMapping("/search")
+    public Page<YogurtDto> searchYogurt(@PageableDefault(size = 10, sort = "name") Pageable pageable, @RequestBody YogurtSearchDto yogurtSearchDto) {
+        return yogurtQueryService.selectAllByCondition(pageable, yogurtSearchDto);
     }
 }

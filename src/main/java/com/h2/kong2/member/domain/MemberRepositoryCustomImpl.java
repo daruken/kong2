@@ -11,10 +11,10 @@ import java.util.List;
 
 import static com.h2.kong2.member.domain.QMember.member;
 
-public class CustomMemberRepositoryImpl implements CustomMemberRepository {
+public class MemberRepositoryCustomImpl implements MemberRepositoryCustom {
     private final JPAQueryFactory queryFactory;
 
-    public CustomMemberRepositoryImpl(JPAQueryFactory queryFactory) {
+    public MemberRepositoryCustomImpl(JPAQueryFactory queryFactory) {
         this.queryFactory = queryFactory;
     }
 
