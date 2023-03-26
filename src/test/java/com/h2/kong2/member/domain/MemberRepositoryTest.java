@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 @Import({QuerydslConfiguration.class})
 @ActiveProfiles("test")
-class MemberTest {
+class MemberRepositoryTest {
     @Autowired
     MemberRepository memberRepository;
 
