@@ -3,11 +3,11 @@ package com.h2.kong2.config;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.test.context.ActiveProfiles;
+import org.springframework.context.annotation.Profile;
 import redis.embedded.RedisServer;
 
 @Configuration
-@ActiveProfiles("test")
+@Profile("test")
 public class EmbeddedRedisConfig {
     private RedisServer redisServer;
 
