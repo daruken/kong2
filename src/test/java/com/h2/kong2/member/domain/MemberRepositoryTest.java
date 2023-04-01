@@ -29,11 +29,14 @@ class MemberRepositoryTest {
                 .build();
 
         Member member = memberRepository.save(test);
+        Member resultMember = memberRepository.findById(member.getId()).orElseThrow();
 
         assertEquals(member.getName(), test.getName());
         assertEquals(member.getPassword(), test.getPassword());
         assertEquals(member.getEmail(), test.getEmail());
         assertEquals(member.getCreatedDate(), test.getCreatedDate());
         assertEquals(member.getUpdatedDate(), test.getUpdatedDate());
+
+        assertEquals(member, resultMember);
     }
 }
