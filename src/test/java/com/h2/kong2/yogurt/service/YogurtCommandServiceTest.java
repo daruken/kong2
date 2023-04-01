@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -24,6 +25,7 @@ class YogurtCommandServiceTest {
     YogurtRepository yogurtRepository;
 
     @Test
+    @Transactional
     void 요거트_재고_테스트() throws InterruptedException {
         Yogurt yogurt = Yogurt.builder()
                 .id(1L)
