@@ -21,4 +21,12 @@ public class Yogurt {
 
     private String name;
     private int price;
+    private Long quantity;
+
+    public void decrease(final Long quantity) {
+        if (this.quantity - quantity < 0) {
+            throw new RuntimeException("재고 부족");
+        }
+        this.quantity = this.quantity - quantity;
+    }
 }
