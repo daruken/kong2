@@ -31,12 +31,12 @@ public class MemberCommandService {
     }
 
     public MemberDto signUp(SignUpDto signUpDto) {
-        if (memberRepository.existsByName(signUpDto.name())) {
+        if (memberRepository.existsByName(signUpDto.username())) {
             throw new AlreadyExistsException("이미 가입된 사용자입니다.");
         }
 
         Member member = Member.builder()
-                .name(signUpDto.name())
+                .name(signUpDto.username())
                 .password(passwordEncoder.encode(signUpDto.password()))
                 .email(signUpDto.email())
                 .createdDate(LocalDateTime.now())
@@ -54,7 +54,7 @@ public class MemberCommandService {
     }
 
     public SignInResultDto signIn(SignInDto signInDto) throws RuntimeException {
-        Member member = memberRepository.getMemberByName(signInDto.name());
+        Member member = memberRepository.getMemberByName(signInDto.username());
         if (!passwordEncoder.matches(signInDto.password(), member.getPassword())) {
             return SignInResultDto.builder()
                     .isLogin(false)

@@ -25,7 +25,7 @@ public class YogurtController {
     }
 
     @PostMapping("/search")
-    public Page<YogurtDto> searchYogurt(@PageableDefault(size = 10, sort = "name") Pageable pageable, @RequestBody YogurtSearchDto yogurtSearchDto) {
+    public Page<YogurtDto> searchYogurt(@PageableDefault(size = 10, sort = "username") Pageable pageable, @RequestBody YogurtSearchDto yogurtSearchDto) {
         return yogurtQueryService.selectAllByCondition(pageable, yogurtSearchDto);
     }
 }
