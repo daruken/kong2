@@ -31,14 +31,19 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(authorize -> authorize
                         .shouldFilterAllDispatcherTypes(false)
                         .requestMatchers("/test",
-                                "/test2",
                                 "/api/v1/members/sign-up",
-                                "/api/v1/members/sign-in")
+                                "/api/v1/members/sign-in",
+                                "/api/v1/members/sign-out")
                         .permitAll()
                         .anyRequest()
                         .authenticated()
                 )
-                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
+                .logout()
+                .logoutUrl("/api/v1/members/sign-out")
+                .logoutSuccessUrl("/api/v1/members/sign-in")
+                .deleteCookies("jwt");
+
         return httpSecurity.build();
     }
 }

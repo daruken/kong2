@@ -34,6 +34,11 @@ public class MemberController {
         return memberCommandService.signUp(signUpDto);
     }
 
+    @GetMapping("/sign-in")
+    public String signInDummy() {
+        return "";
+    }
+
     @PostMapping("/sign-in")
     public SignInResultDto signIn(@RequestBody SignInDto signInDto) {
         return memberCommandService.signIn(signInDto);

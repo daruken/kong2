@@ -7,11 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
     @GetMapping("/test")
     public String test() {
-        return "Hello";
-    }
-
-    @GetMapping("/test2")
-    public String test2() {
         return "홍텐의 개인 서비스입니다.";
     }
 }
